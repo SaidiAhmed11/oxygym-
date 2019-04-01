@@ -1,0 +1,28 @@
+.contact {
+    background:skyblue;
+}
+.alert {
+    text-align: center;
+    padding: 10px;
+    background: #79c879;
+    color: #fff;
+    margin-bottom: 10px;
+    display: none;
+}
+h2 {
+  font-family: Comic Sans MS;
+}
+
+.alert{
+  text-align: center; padding:10px; background:#79c879; 
+  color:#fff; margin-bottom:10px; display:none;
+}
+p
+{
+    width: 350px; 
+    margin: auto; 
+    border: 1px solid black;
+    text-align: justify;
+    padding: 12px;
+    margin-bottom: 20px;
+}
