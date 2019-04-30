@@ -49,8 +49,7 @@ class CommandeC
         }
 	}
 	function modifierCommande($Commande,$id_commande){
-		$sql="UPDATE commande SET nom_produit=:nom_produit,prix=:prix,quantite=:quantite,total=:total WHERE id_commande=:id_commande";
-		
+		$sql="UPDATE `commande` SET `nom_produit` = :nom_produit, `prix` = :prix, `quantite` = :quantite, `total` = :total WHERE id_commande= :id_commande" ;
 		$db = config::getConnexion();
 		//$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
 		echo $sql;
@@ -64,7 +63,7 @@ try{
         //$IDD--;
         $req->bindValue(':id_commande',$id_commande);
 		$req->bindValue(':nom_produit',$nom_produit);
-		$req->bindValue('prix',$prix);
+		$req->bindValue(':prix',$prix);
 		$req->bindValue(':quantite',$quantite);
 		$req->bindValue(':total',$total);
         $s=$req->execute();
@@ -87,7 +86,7 @@ try{
 	}
     
     function rechercherListeCommande($id_commande){
-		$sql="SELECT * from commande where id_commande=$id_commande";
+		$sql="SELECT * from commande where user_name='$id_commande'";
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);

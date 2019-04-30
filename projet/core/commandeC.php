@@ -1,9 +1,10 @@
 <?PHP
+session_start();
 include "../config.php";
 class CommandeC
 {
 	function AjouterCommande($Commande){
-		$sql="insert into commande(nom_produit,prix,quantite,total) values (:nom_produit,:prix,:quantite,:total)";
+		$sql="insert into commande(nom_produit,prix,quantite,total,user_name) values (:nom_produit,:prix,:quantite,:total,:user_name)";
 		$db = config::getConnexion();
 		try{
         $req=$db->prepare($sql);
@@ -12,7 +13,9 @@ class CommandeC
         $prix=$Commande->getprix();
         $quantite=$Commande->getquantite();
         $total=$Commande->gettotal();
-        
+        $user_name= $_SESSION['l'];
+            
+        $req->bindValue(':user_name',$user_name);
 		$req->bindValue(':nom_produit',$nom_produit);
 		$req->bindValue('prix',$prix);
 		$req->bindValue(':quantite',$quantite);

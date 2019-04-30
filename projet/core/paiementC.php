@@ -1,10 +1,12 @@
 <?PHP
+session_start();
+
 include "../config.php";
 class PaiementC {
     
     
 function ajouterPaiement($Paiement){
-		$sql="insert into paiement (nom,prenom,mail,type_paiement,pays,num_carte,date_exp,code_sec,adresse,code_postal,num_tel) values (:nom,:prenom,:email,:type_paiement,:pays,:num_carte,:date_exp,:Code_sec,:adresse,:code_postal,:num_tel)";
+		$sql="insert into paiement (nom,prenom,mail,type_paiement,pays,num_carte,date_exp,code_sec,adresse,code_postal,num_tel,user_name) values (:nom,:prenom,:email,:type_paiement,:pays,:num_carte,:date_exp,:Code_sec,:adresse,:code_postal,:num_tel,:user_name)";
 		$db = config::getConnexion();
 		try{
         $req=$db->prepare($sql);
@@ -21,9 +23,9 @@ function ajouterPaiement($Paiement){
         $adresse=$Paiement->getadresse();
         $code_postal=$Paiement->getcodepostal();
         $num_tel=$Paiement->getnumtel();
+        $user_name= $_SESSION['l'];
             
-            
-        
+        $req->bindValue(':user_name',$user_name);
         $req->bindValue(':nom',$nom);
 		$req->bindValue(':prenom',$prenom);
 		$req->bindValue(':email',$email);

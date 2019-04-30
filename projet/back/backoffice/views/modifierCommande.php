@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <HTML>
 <head>
   <meta charset="utf-8" />
@@ -13,6 +17,8 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
+    </body>
+</HTML>
 <?PHP
 include "../entities/commande.php";
 include "../core/commandeC.php";
@@ -55,12 +61,12 @@ if (isset($_GET['id_commande'])){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Oxygym +</a> 
+                <a class="navbar-brand" href="back.php">Oxygym +</a> 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 16px;">  &nbsp; <a href="./logout.php" class="btn btn-danger square-btn-adjust">Logout</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
@@ -72,7 +78,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 				
 					
                     <li>
-                        <a   href="index.html"><i class="fa fa-dashboard fa-3x"></i> Inscription </a>
+                        <a   href="back.php"><i class="fa fa-dashboard fa-3x"></i> Inscription </a>
                     </li>
                      <li>
                         <a  href="activite.html"><i class="fa fa-desktop fa-3x"></i> Activité</a>
@@ -81,7 +87,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         <a  href="produits.html"><i class="fa fa-qrcode fa-3x"></i> Produits </a>
                     </li>
 						   <li  >
-                        <a  class="active-menu" href="commandeetpanier.html"><i class="fa fa-bar-chart-o fa-3x"></i> Commandes & Panier </a>
+                        <a  class="active-menu" href="commandeetpanier.php"><i class="fa fa-bar-chart-o fa-3x"></i> Commandes & Panier </a>
                                <ul class="nav nav-second-level">
                             <li>
                                 <a href="afficherCommande.php">Gérer les Commandes </a>
@@ -108,7 +114,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 <div class="row">
                     <div class="col-md-12">
                      <h2>Commande et Panier </h2>   
-                        <h5>Welcome Saidi Ahmed </h5>
+                       <h5>Welcome <?php echo $_SESSION['l'];?> </h5> 
                        
                     </div>
                 </div>
@@ -160,9 +166,9 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 </div>
                  
              <!-- /. PAGE INNER  -->
-            </div>
+            
          <!-- /. PAGE WRAPPER  -->
-        </div>
+        
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
@@ -178,7 +184,9 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 </body>
 </html>
 
-    
+   
+<HTMl> 
+<body>
 
 <?PHP
 	}

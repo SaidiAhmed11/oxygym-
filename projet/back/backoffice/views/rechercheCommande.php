@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
       <meta charset="utf-8" />
@@ -27,6 +32,7 @@ if(isset($_GET['id_commande']) AND !empty($GET_['id_commande']))
    //$id_commande= htmlspecialchars($GET_['id_commande']);
     $commandeC=new CommandeC();
     $result=$commandeC->rechercherListeCommande($_GET['id_commande']);
+    var_dump($result);
     
     //$listeCommandes= $db->querry('SELECT * from commande where id_commande LIKE "%'.$id_commande.'%" ');
 
@@ -61,12 +67,12 @@ if(isset($_GET['id_commande']) AND !empty($GET_['id_commande']))
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Oxygym +</a> 
+                <a class="navbar-brand" href="back.php">Oxygym +</a> 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 16px;">  &nbsp; <a href="./logout.php" class="btn btn-danger square-btn-adjust">Logout</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
@@ -78,7 +84,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 				
 					
                     <li>
-                        <a   href="index.html"><i class="fa fa-dashboard fa-3x"></i> Inscription </a>
+                        <a   href="back.php"><i class="fa fa-dashboard fa-3x"></i> Inscription </a>
                     </li>
                      <li>
                         <a  href="activite.html"><i class="fa fa-desktop fa-3x"></i> Activité</a>
@@ -87,7 +93,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         <a  href="produits.html"><i class="fa fa-qrcode fa-3x"></i> Produits </a>
                     </li>
 						   <li  >
-                        <a  class="active-menu" href="commandeetpanier.html"><i class="fa fa-bar-chart-o fa-3x"></i> Commandes & Panier </a>
+                        <a  class="active-menu" href="commandeetpanier.php"><i class="fa fa-bar-chart-o fa-3x"></i> Commandes & Panier </a>
                                <ul class="nav nav-second-level">
                             <li>
                                 <a href="afficherCommande.php">Gérer les Commandes </a>
@@ -114,7 +120,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 <div class="row">
                     <div class="col-md-12">
                      <h2>Commande et Panier </h2>   
-                        <h5>Welcome Saidi Ahmed </h5>
+                       <h5>Welcome <?php echo $_SESSION['l'];?> </h5> 
                        
                     </div>
                 </div>
@@ -123,7 +129,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         <div class="top-search">
 						<form id="header-search" class="search-form"  method="get">
 							<input type="hidden" name="type" value="product">
-							<input type="text" class="input-block-level" name="id_commande" value="" accesskey="4" autocomplete="off" placeholder="search entire store here">
+							<input type="text" class="input-block-level" name="id_commande" value="" accesskey="4" autocomplete="off" placeholder="search commande by user">
 							<button type="submit" class="search-submit" title="Search">
 								<i class="fa fa-search"></i>
 							</button>
@@ -132,12 +138,15 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" border="1">
+                                    <br> 
+                                    <br> 
 <tr>
 <td>id commande</td>
 <td>Nom Produit</td>
 <td>prix</td>
 <td>quantite</td>
 <td>prix total</td>
+<td>user name</td>
 </tr>
 
                                 
@@ -161,24 +170,22 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
     <!-- METISMENU SCRIPTS -->
     <script src="assets/js/jquery.metisMenu.js"></script>
       <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
-    
-   
-</body>
-</html>
-
-    
+    <script src="assets/js/custom.js"></script> 
 
 
 <?PHP
+     
+    $commandeC=new CommandeC();
+    $result=$commandeC->rechercherListeCommande($_GET['id_commande']);
 foreach($result as $row){
 	?>
 	<tr>
 	<td><?PHP echo $row['id_commande']; ?></td>
-	<td><?PHP echo $row['nom_produit']; ?></td>
+    <td><?PHP echo $row['nom_produit']; ?></td>
 	<td><?PHP echo $row['prix']; ?></td>
 	<td><?PHP echo $row['quantite']; ?></td>
 	<td><?PHP echo $row['total']; ?></td>
+    <td><?PHP echo $row['user_name']; ?></td>
     
     <td><form method="POST" action="supprimerCommande.php">
 	<button type="submit" name="supprimer" value="supprimer" class="btn btn-danger"><i class="fa fa-pencil"></i> Supprimer</button>

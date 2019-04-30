@@ -9,6 +9,11 @@ function test()
     var adresse = f.adresse.value;
     var codePostal = f.code_postal.value;  
     var numtel = f.num_tel.value;
+    var date_now=new Date(); 		 
+    var date_saisie = f.date_exp.value;
+    var date_jour=new Date(date_now.getFullYear(),date_now.getMonth(),date_now.getDate()); 
+    date_saisie=date_saisie.replace(/-/g,"");
+    Date_Saisie=new Date(date_saisie.substr(0,4),date_saisie.substr(4,2)-1,date_saisie.substr(6,2));
     
     if( mail.length== 0 || nom.length== 0 || prenom.length== 0 || numcarte.length== 0 || codesec.length== 0 || adresse.length== 0 || codePostal.length== 0 || numtel.length== 0)
        
@@ -31,7 +36,11 @@ alert ("le Num Carte doit contenir 10 caractères et doit être numérique");
 {
 alert ("le code de sécurité doit contenir 4 caractères et doit être numérique ");
 }
-
+   else if (Date_Saisie <= date_jour)
+   {
+      alert ("date invalid ");
+   }
+    
      else if ((numtel.length != 8)&&(isNaN(numtel.value)==true))
 {
 alert ("le numtel doit contenir 8 caractères et doit être numérique ");
@@ -40,9 +49,9 @@ alert ("le numtel doit contenir 8 caractères et doit être numérique ");
  else if (f.pays.options.selectedIndex==-1)
 {
 alert("sélectionner un pays");
-}
+} 
 
-    
+
    else if ((mail.indexOf("@")>=0)&&(mail.indexOf(".")>=0))
     {  
        

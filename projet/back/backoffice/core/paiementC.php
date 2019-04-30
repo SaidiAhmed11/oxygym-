@@ -48,7 +48,12 @@ function ajouterPaiement($Paiement){
     
     function afficherPaiement(){
 		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sortBy = (isset($_POST['sortBy']) ? $_POST['sortBy'] : NULL);
 		$sql="SElECT * From paiement";
+        if($sortBy != NULL)
+        {
+            $sql.=" ORDER BY ".$sortBy;
+        }
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);
@@ -58,6 +63,7 @@ function ajouterPaiement($Paiement){
             die('Erreur: '.$e->getMessage());
         }	
 	}
+    
     
     
     function supprimerPaiement($id_paiement){
@@ -96,7 +102,7 @@ try{
         $code_postal=$Paiement->getcodepostal();
         $num_tel=$Paiement->getnumtel();
     
-		$datas = array(':nom'=>$nom,':prenom'=>$prenom,':mail'=>$email,':type_paiement'=>$type_paiement,':pays'=>$pays,':num_carte'=>$num_carte,':date_exp'=>$date_exp,':code_sec'=>$Code_sec,':adresse'=>$adresse,':code_postal'=>$code_postal,':num_tel'=>$num_tel);
+		//$datas = array(':nom'=>$nom,':prenom'=>$prenom,':mail'=>$email,':type_paiement'=>$type_paiement,':pays'=>$pays,':num_carte'=>$num_carte,':date_exp'=>$date_exp,':code_sec'=>$Code_sec,':adresse'=>$adresse,':code_postal'=>$code_postal,':num_tel'=>$num_tel);
         $req->bindValue(':id_paiement',$id_paiement);
 	    $req->bindValue(':nom',$nom);
 		$req->bindValue(':prenom',$prenom);

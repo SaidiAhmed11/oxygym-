@@ -1,4 +1,5 @@
 <?PHP
+session_start();
 include "../entities/paiement.php";
 include "../core/paiementC.php";
 
